@@ -2,11 +2,9 @@
 using RapidPay.Api.Filters;
 using RapidPay.Api.Models;
 using RapidPay.Services.Contracts;
-using System.Web.Http.ModelBinding;
 
 namespace RapidPay.Api.Controllers
 {
-    [Route("Financial")]
     public class FinancialController : Controller
     {
         private IPaymentRepository paymentRepository { get; }
@@ -16,7 +14,6 @@ namespace RapidPay.Api.Controllers
             this.paymentRepository = paymentRepository;
         }
 
-        [HttpGet]
         [ApiExplorerSettings(IgnoreApi = true)]
         [ServiceFilter(typeof(TokenAuthFilter))]
         public async Task<IActionResult> PaymentView()
@@ -40,7 +37,7 @@ namespace RapidPay.Api.Controllers
                     return RedirectToAction("BalanceView", "Financial");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.PaymentMessage = ex.Message;
             }
@@ -53,15 +50,15 @@ namespace RapidPay.Api.Controllers
             if (ModelState.IsValid)
             {
                 HttpContext.Request.Cookies.TryGetValue("username", out string username);
-                    paymentResponse = await paymentRepository.PayAsync(
-                        username: username,
-                        cardNumber: vmPayment.CardNumber,
-                        amount: vmPayment.Amount,
-                        cvv: vmPayment.Cvv,
-                        expirationMonth: vmPayment.ExpirationMonth,
-                        expirationYear: vmPayment.ExpirationYear
-                    );
-                    return paymentResponse;
+                paymentResponse = await paymentRepository.PayAsync(
+                    username: username,
+                    cardNumber: vmPayment.CardNumber,
+                    amount: vmPayment.Amount,
+                    cvv: vmPayment.Cvv,
+                    expirationMonth: vmPayment.ExpirationMonth,
+                    expirationYear: vmPayment.ExpirationYear
+                );
+                return paymentResponse;
             }
             else
             {
@@ -108,15 +105,13 @@ namespace RapidPay.Api.Controllers
                 decimal balance = await GetBalanceAsync();
 
                 return Ok(balance);
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        [HttpGet]
-        [Route(nameof(BalanceView))]
         [ApiExplorerSettings(IgnoreApi = true)]
         [ServiceFilter(typeof(TokenAuthFilter))]
         public async Task<IActionResult> BalanceView()

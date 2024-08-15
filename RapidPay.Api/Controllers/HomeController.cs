@@ -5,8 +5,6 @@ using RapidPay.Services.Contracts;
 
 namespace RapidPay.Api.Controllers;
 
-[ApiController]
-[Route("Home")]
 public class HomeController : Controller
 {
     private readonly ISecurityRepository _userRepository;
@@ -17,14 +15,12 @@ public class HomeController : Controller
     }
 
     [ApiExplorerSettings(IgnoreApi = true)]
-    [Route(nameof(Index))]
-    [HttpGet]
     public IActionResult Index()
     {
         return View();
     }
 
-    [Route($"{nameof(Login)}")]
+    [Route("Login")]
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginViewModel vmLogin)
     {
