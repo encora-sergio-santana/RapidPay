@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+/.vs/
+*.csproj.user
+/RapidPay.Api/bin/
+/RapidPay.Api/obj/
+/RapidPay.Services/bin/
+/RapidPay.Services/obj/
+/RapidPay.Services.Tests/bin/
+/RapidPay.Services.Tests/obj/

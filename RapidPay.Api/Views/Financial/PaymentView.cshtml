@@ -1,0 +1,52 @@
+﻿@model PaymentViewModel;
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<div class="text-left mb-5 form-control">
+    @if (!string.IsNullOrEmpty(ViewBag.PaymentMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.PaymentMessage
+        </div>
+    }
+
+    @Html.ValidationSummary()
+
+    <form asp-controller="Financial" asp-action="PaymentPostView" method="post">
+        <h1 class="text-center display-4 mt-5">@ViewData["Title"]</h1>
+        <div class="mb-3">
+            <div class="form-group">
+                <label for="CardNumber" class="form-label">CardNumber:</label><br />
+                <input type="text" name="CardNumber" id="CardNumber" placeholder="Enter CardNumber" value="@Model?.CardNumber"
+                    required pattern="\d{15}" title="Introduce a valid credit card" maxlength="15" class="form-control w-100">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="Amount" class="form-label">Amount:</label><br />
+            <input type="number" name="Amount" id="Amount" placeholder="Enter Amount" value="@Model?.Amount"
+                   required class="form-control w-100">
+        </div>
+        <div class="mb-3">
+            <div class="form-group">
+                <label for="Cvv" class="form-label">Cvv:</label><br />
+                <input type="password" name="Cvv" id="Cvv" placeholder="Enter Cvv" value="@Model?.Cvv"
+                    required pattern="\d{3}" maxlength="3" title="Introduce a valid CVV" class="form-control w-100">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="ExpirationMonth" class="form-label">Expiration Month:</label><br />
+            <input type="text" name="ExpirationMonth" id="ExpirationMonth" placeholder="Enter ExpirationMonth" value="@Model?.ExpirationMonth"
+                   required pattern="[1-9]|1[0-2]" maxlength="2" title="Introduce a valid Expiration Month" class="form-control w-100">
+        </div>
+        <div class="mb-3">
+            <label for="ExpirationYear" class="form-label">Expiration Year:</label><br />
+            <input type="text" name="ExpirationYear" id="ExpirationYear" placeholder="Enter ExpirationYear" value="@Model?.ExpirationYear"
+                   required pattern="\d{4}" maxlength="4" title="Introduce a valid Expiration Year" class="form-control w-100">
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="w-100 btn btn-success">Pay</button>
+        </div>
+    </form>
+</div>

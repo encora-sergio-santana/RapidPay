@@ -1,0 +1,13 @@
+﻿@model BalanceViewModel;
+
+@{
+    ViewData["Title"] = "Balance";
+}
+
+<div class="card form-control mt-5"
+    <div class="card-body">
+        <h4 class="card-title">Balance</h4>
+        <p class="card-text">@Model.Balance.ToString("C2")</p>
+        <a asp-controller="Financial" asp-action="PaymentView" class="card-button btn-success text-center p-2">Make a payment</a>
+    </div>
+</div>
