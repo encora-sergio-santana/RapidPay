@@ -21,7 +21,7 @@ public class RapidPayContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>().HasData(
-            new User(userId: 1, userName: "sergio", hashPassword: "48-FA-F5-89-CB-AD-0A-A4-78-02-DA-41-F1-1B-6B-A2-4E-F7-71-97-5B-4D-64-DF-D6-9C-C0-6B-BA-83-62-49") //"48FAF589CBAD0AA47802DA41F11B6BA24EF771975B4D64DFD69CC06BBA836249")
+            new User(userId: 1, userName: "sergio", hashPassword: "48-FA-F5-89-CB-AD-0A-A4-78-02-DA-41-F1-1B-6B-A2-4E-F7-71-97-5B-4D-64-DF-D6-9C-C0-6B-BA-83-62-49")
         );
         modelBuilder.Entity<Card>().HasData(
             new Card(cardId: 1, userId: 1, credit: 10000, cardNumber: "411111111111111", cvv: "123", expirationMonth: 12, expirationYear: 2030)
