@@ -48,6 +48,7 @@ public class PaymentRepository : IPaymentRepository
     public async Task<decimal> GetBalanceAsync(string username)
     {
         decimal balance = await context.SubLedgers
+            .AsNoTracking()
             .Include(s => s.Ledger)
             .Include(s => s.Card).ThenInclude(c => c.User)
             .Where(r => r.Ledger.Year == 2024 && r.Ledger.Period == 8 && r.Card.User.UserName == username)
@@ -67,7 +68,7 @@ public class PaymentRepository : IPaymentRepository
             else
                 lastFee *= (decimal)fee;
 
-            this.memoryCache.Set(PAYMENT_FEE, lastFee);
+            this.memoryCache.Set(PAYMENT_FEE, lastFee, TimeSpan.FromHours(1));
         }
             
         return (decimal)fee;
